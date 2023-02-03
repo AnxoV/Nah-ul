@@ -151,35 +151,48 @@ Noise.prototype.perlin2D = function(x, y) {
     return this.interpolateNoise(noiseCorners, fadeVector);
 };
 
-addEventListener("DOMContentLoaded", () => {
-    let grid_size = 8;
-    let canvas_resolution = 256;
-    let resolution = 256;
-    let pixel_size = Math.floor(canvas_resolution / resolution);
-    let number_pixels = grid_size / resolution;
-    
-    let canvas = document.getElementById("ruido-perlin");
-    let ctx = canvas.getContext("2d");
-    canvas.width = canvas.height = canvas_resolution;
-    let noise = new Noise();
+class Display {
+    constructor(canvas, width, height) {
+        this.canvas = canvas;
+        this.ctx = this.canvas.getContext("2d");
+        this.resize(width, height);
+    }
+}
+Display.prototype.resize = function(width, height) {
+    this.canvas.width = width;
+    this.canvas.height = height;
+}
 
-    function paintNoise() {
-        noise.setSeed(Date.now());
-        let colour;
-        for (let x = 0; x < grid_size; x += number_pixels) {
-            for (let y = 0; y < grid_size; y += number_pixels) {
-                colour = ((noise.perlin2D(x, y) + 1) * 255) / 2;
-                ctx.fillStyle = `rgb(${colour}, ${colour}, ${colour})`;
-                ctx.fillRect(
-                    Math.floor(x / grid_size * resolution),
-                    Math.floor(y / grid_size * resolution),
-                    pixel_size,
-                    pixel_size
-                );
-            }
+function $(query) {
+    return document.querySelector(query);
+}
+
+function paintNoise() {
+    noise.setSeed(Date.now());
+    let colour;
+    for (let x = 0; x < grid_size; x += number_pixels) {
+        for (let y = 0; y < grid_size; y += number_pixels) {
+            colour = ((noise.perlin2D(x, y) + 1) * 255) / 2;
+            ctx.fillStyle = `rgb(${colour}, ${colour}, ${colour})`;
+            ctx.fillRect(
+                Math.floor(x / grid_size * resolution),
+                Math.floor(y / grid_size * resolution),
+                pixel_size,
+                pixel_size
+            );
         }
     }
+}
 
-    paintNoise();
-    setInterval(paintNoise, 2500);
+addEventListener("DOMContentLoaded", () => {
+    let grid_size          = 8;
+    let canvas_resolution  = 256;
+    let resolution         = 256;
+    let pixel_size         = Math.floor(canvas_resolution / resolution);
+    let number_pixels      = grid_size / resolution;
+
+    const display = new Display($("#ruido-perlin"), canvas_resolution, canvas_resolution);
+    const noise = new Noise();
+
+    
 });
