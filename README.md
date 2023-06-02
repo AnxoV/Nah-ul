@@ -1,3 +1,5 @@
+[![GitHub last commit](https://img.shields.io/github/last-commit/AnxoV/Nah-ul)](https://shields.io/category/activity)
+
 # Nah-ul
 
 Prueba
