@@ -1,5 +1,6 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/AnxoV/Nah-ul)](https://shields.io/category/activity)
 [![Website](https://img.shields.io/website?down_message=Offline&up_message=Online&url=https%3A%2F%2Fanxov.github.io%2FNah-ul%2F)](https://shields.io/category/monitoring)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/AnxoV/Nah-ul)](https://shields.io/category/version)
 
 # Nah-ul
 
